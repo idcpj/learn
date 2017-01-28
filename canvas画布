@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
+	<style type='text/css'>
+		#test{
+			border: 1px solid red;
+		}
+	</style>
+</head>
+<body>
+	<button id="changeC">加粗</button>
+	<button id="changeX">变细</button>
+	<button id="clear">清除</button>
+	<p id="num">1</p>
+	<canvas id="test" width="250" height="250"></canvas>
+	
+	<script type="text/javascript">
+		var c=document.getElementById('test');
+		var t=c.getContext('2d');
+		var pp=false;
+		var n=1;
+		$("#test").mousedown(function(e){
+			pp=true;
+		});
+
+		$("#test").mouseup(function(e){
+			pp=false;
+		});
+		/*按下画图*/
+		$("#test").mousemove(function(e){
+			var mouseX=e.pageX-this.offsetLeft;
+			var mouseY=e.pageY-this.offsetTop;
+			if (pp) {
+				t.moveTo(mouseX,mouseY);
+				t.lineTo(mouseX+n,mouseY+n);
+				t.stroke();
+			}
+		});
+		/*加粗*/
+		$('#changeC').click(function(){
+			if (n<10) {
+				n+=2;
+			}
+			$("#num").html(n);
+		})
+		/*变细*/
+		$('#changeX').click(function(){
+			if(n>0){
+				n-=2;
+			}
+			$("#num").html("线框"+n);
+		});
+		/*清除画布*/
+		$("#clear").click(function(){
+			t.clearRect(0, 0, 250, 250);
+			
+			t.setTransform(1, 0, 0, 1, 0, 0);
+
+		})
+
+	</script>
+
+</body>
+</html>
