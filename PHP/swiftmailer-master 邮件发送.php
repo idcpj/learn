@@ -1,4 +1,11 @@
 <?php
+
+/*
+邮箱插件地址:https://github.com/swiftmailer/swiftmailer
+*/
+
+
+
 //发邮件的核心文件
 require_once 'swiftmailer-master/lib/swift_required.php';
 
