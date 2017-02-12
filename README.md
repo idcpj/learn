@@ -6,4 +6,4 @@
 2.AJAX+php 实现异步文件上传
 
 ##PHP
-1.最简单的发送文件方式
+1.swiftmailer-master 最简单的邮件发送案例
