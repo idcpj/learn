@@ -1,7 +1,8 @@
 <?php
 
 	/**
-	 * 生成,删除缓存文件
+	 * 生成,删除缓存文件,
+	 *
 	 */
 class File {
 	private $_dir;
