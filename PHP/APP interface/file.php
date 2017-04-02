@@ -1,9 +1,5 @@
 <?php
 
-	/**
-	 * 生成,删除缓存文件,
-	 *
-	 */
 class File {
 	private $_dir;
 
@@ -12,14 +8,10 @@ class File {
 	public function __construct() {
 		$this->_dir = dirname(__FILE__) . '/files/';
 	}
-
-
 	public function cacheData($key, $value = '', $cacheTime = 0) {
 		$filename = $this->_dir  . $key . self::EXT;
 
-		//存在value 生存缓存
 		if($value !== '') { // 将value值写入缓存
-			//如果value是null,删除缓存
 			if(is_null($value)) {
 				return @unlink($filename);
 			}
@@ -32,7 +24,6 @@ class File {
 			return file_put_contents($filename,$cacheTime . json_encode($value));
 		}
 
-		//存在文件名  读取缓存
 		if(!is_file($filename)) {
 			return FALSE;
 		} 
@@ -47,3 +38,7 @@ class File {
 		
 	}
 }
+
+$file = new File();
+
+echo $file->cacheData('test1');

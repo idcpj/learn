@@ -1,11 +1,5 @@
 <?php
 
-	/**
-	 * 通过show方法调用即可
-	 * 例子:
-	 *  show(200,"更新成功",$data,$type='json')
-	 * Class Response
-	 */
 class Response {
 	const JSON = "json";
 	/**
