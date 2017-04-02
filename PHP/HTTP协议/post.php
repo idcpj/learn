@@ -15,22 +15,25 @@
 	//}
 	//
 
-		$data =array(
-			'title'=>'asfasf',
-			'content'=> 'content',
-		);
+	$data =array(
+		'title'=>'asfasf',
+		'content'=> 'content',
+	);
 
-		$dataStr = http_build_query($data);
-		$options = array(
-			'http'=>array(
-				'method'=>'POST',
-				'header'=>"Host:localhost\r\n".
-					"Content-type:application/x-www-form-urlencoded\r\n".
-							'content-length:'.strlen($dataStr)."\r\n",
-				'content'=>$dataStr
-			)
-		);
+	$dataStr = http_build_query($data);
+	$options = array(
+		'http'=>array(
+			'method'=>'POST',
+			'header'=>"Host:localhost\r\n".
+				"Content-type:application/x-www-form-urlencoded\r\n".
+						'content-length:'.strlen($dataStr)."\r\n",
+			'content'=>$dataStr
+		)
+	);
 
-		$contens = stream_context_create($options);
+	$conten = stream_context_create($options);
 
-		file_get_contents("http://localhost/db.php",false,$contens);
+	$url="http://localhost/db.php";
+	file_get_contents($url,false,$conten);
+	$handle = fopen($url, 'r',false,$conten);
+	fclose($handle);
