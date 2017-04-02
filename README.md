@@ -16,4 +16,6 @@
 
 2.APP 接口
 
-3.用file_get_content 模拟post请求
+3.HTTP协议
+
+    用file_get_content 模拟post请求
