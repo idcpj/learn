@@ -7,7 +7,7 @@
 			die("数据库连接失败".mysqli_connect_error());
 		}
 		mysqli_select_db($link, 'test');
-		$sql= "insert get_post(`title`,`content`) values('{$title}','$content')";
+		$sql= "insert get_post(`title`,`content`) values('{$title}','{$content}')";
 		$result= mysqli_query($link, $sql);
 		if($result =false){
 		    die("插入失败:".mysqli_error($link));
