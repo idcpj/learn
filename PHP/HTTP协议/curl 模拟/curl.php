@@ -3,7 +3,7 @@
 	//初始化curl会话
 	$ch = curl_init();
 
-	$url = 'http://localhost/test.php';
+	$url = 'http://localhost/db.php';
 	$data= array(
 		'title'=>"我是curl提交的title",
 		'content'=>'我是curl提交的content'
@@ -28,4 +28,4 @@
 	curl_close($ch);
 
 
-	echo $result;
+	var_dump($result);
