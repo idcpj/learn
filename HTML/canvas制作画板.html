@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
 	<style type='text/css'>
 		#test{
-			border: 1px solid red;
+			border: 1px solid #edffd1;
 			float: left;
 		}
 		.aside{
@@ -37,7 +37,7 @@
 		$('#color').change(function(){
 			color=$(this).val();
 			t.strokeStyle=color;
-		})
+		});
 
 		var c=document.getElementById('test');
 		var t=c.getContext('2d');
@@ -73,7 +73,7 @@
 				n+=2;
 			}
 			$("#num").html(n);
-		})
+		});
 
 		/*变细*/
 		$('#changeX').click(function(){

@@ -46,7 +46,7 @@
     ---
     400 BAD REQUEST 用户发出的请求有错误
     401 Unauthorized 用户没有验证，无法进行当前操作
-    401 Forbidden   用户访问被禁止
+    403 Forbidden   用户访问被禁止
     422 Unprocesable Entity     当创建一个对象时，发生一个验证错误（如密码为空等）
     500 INTERNAL SERVER ERROR   服务器发生错误，用户将无法判定发出的请求是否成功
 ## 5.错误处理
