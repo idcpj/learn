@@ -36,16 +36,14 @@
 		}
 
 		//编辑
-		public function edit($titler,$content,$author,$article_id,$user_id){
+		public function edit($titler,$content,$article_id,$user_id){
 			if(empty($titler)){
 				throw new Exception("文章标题不能为空");
 			}
 			if(empty($content)){
 				throw new Exception("内容不能为空");
 			}
-			if(empty($author)){
-				throw new Exception("作者不能为空");
-			}
+
 			if(empty($article_id)){
 				throw new Exception("文章id不能为空");
 			}
@@ -97,18 +95,19 @@
 		}
 
 		//查询所有
-		public function listForPage($user_id,$page=1,$pageSize=2){
+		public function listForPage($user_id,$page=1,$pagesize=2){
 			if(empty($user_id)){
 				throw new Exception("用户id不能为空");
 			}
-			$total= $page==1?$pageSize:($page -1)*$pageSize;
-			$sql="SELECT * FROM `article` WHERE `user_id`=:user_id limit :page,:total ";
+
+			$total=($page-1)*$pagesize;
+			$sql="SELECT * FROM `article` WHERE `user_id`=:user_id limit :total , :pagesize ";
 			$stmt = $this->_db->prepare($sql);
 			$stmt->bindParam(':user_id',$user_id,PDO::PARAM_INT);
-			$stmt->bindParam(':page',$page,PDO::PARAM_INT);
 			$stmt->bindParam(':total',$total,PDO::PARAM_INT);
+			$stmt->bindParam(':pageSize',$pagesize,PDO::PARAM_INT);
 			$stmt->execute();
-			$article = $stmt->fetchALL(PDO::FETCH_ASSOC);
+			$article = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			if(empty($article)){
 				throw new Exception("获取文章失败");
 			}
@@ -126,7 +125,7 @@
 			$stmt->execute();
 			$article = $stmt->fetch(PDO::FETCH_ASSOC);
 			if(empty($article)){
-				throw new Exception("查询失败");
+				throw new Exception("文章不存在",204);
 			}
 			return $article;
 		}

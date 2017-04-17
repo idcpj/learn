@@ -65,5 +65,11 @@
     PUT /collections/identity   返回完整的资源对象属性
     PATCH /collections/identity   返回被修改的属性
     DELETE /collections/identity   返回204+一个空文档
-     
+##编程技巧
+1.除index.php外,的其他类库,都使用抛出异常的方式,index.php中在run()接收异常,其他都通过run()调用
+
+2.调用```$_SERVER['PHP_AUTH_USER']```,``` $_SERVER['PHP_AUTH_PW']```
+
+3.```header("HTTP/1.1". $code ." ".$this->_statusCodes[$code]);```
+更改状态码 
     

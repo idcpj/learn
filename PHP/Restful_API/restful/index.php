@@ -16,9 +16,7 @@
 
 	$pdo = require  __DIR__.'/../lib/db.php';
 
-	/**
-	 * Class Restful
-	 */
+
 	class Restful{
 		private $_user;
 		private $_article;
@@ -51,13 +49,12 @@
 
 		public function run(){
 			try{
-
 				$this->_setupRequestMethod();
 				$this->_setupResource();
 				if($this->_resourceName=='user'){
-					$this->_handleUser();
+					$this->_json($this->_handleUser());
 				}else{
-					$this->_handleArticle();
+					$this->_json($this->_handleArticle());
 				}
 			}catch(Exception $e){
 				$this->_json(['error'=>$e->getMessage()],$e->getCode());
@@ -99,10 +96,14 @@
 		//输出json
 		private function _json($array,$code=0)
 		{
-			if($code>0 && $code!=200){
-				 header("HTTP /1.1 {$code} && {$this->_statusCodes['$code']}");
+			if($array ===null && $code===0){
+				$code=204;
+			}
+			if($array !==null && $code ===0){
+				$code=200;
 			}
 
+			header("HTTP/1.1". $code ." ".$this->_statusCodes[$code]);
 			header('Content-type:application/json;charset=utf-8');
 			echo json_encode($array,JSON_UNESCAPED_UNICODE);
 			exit();
@@ -128,13 +129,28 @@
 				throw new Exception("密码不能为空",400);
 			}
 			$data =$this->_user->register($body['username'], $body['password']);
-			echo json_encode($data);
-			exit;
+			return $data;
 		}
 
 		//请求文章资源
 		private function _handleArticle()
 		{
+			switch($this->_requertMethod){
+				case 'POST':
+					return $this->_handleArticleCreate();
+				case 'PUT':
+					return $this->_handleArticleEidt();
+				case 'DELETE':
+					return $this->_handleArticleDel();
+				case 'GET' :
+					if(empty($this->_id)){
+						return $this->_handleArticleList();
+					}else{
+						return $this->_handleArticleView();
+					}
+				default:
+					throw new Exception("请求方式不被允许");
+			}
 
 		}
 
@@ -152,7 +168,97 @@
 			if(empty($raw)){
 				throw new Exception("请求参数错误",400);
 			}
+			//把json变为数组
 			return json_decode($raw,true);
+		}
+
+		//创建文章
+		private function _handleArticleCreate()
+		{
+			$body =$this->_getBodyParam();
+			if(empty($body['titler'])){
+				throw new Exception("文章标题不能为空",400);
+			}
+			if(empty($body['content'])){
+				throw new Exception("文章内容不能为空",400);
+			}
+			if(empty($body['author'])){
+				throw new Exception("文章作者不能为空",400);
+			}
+			$user = $this->_UserLogin($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+
+			try{
+				$article = $this->_article->add($body['titler'],$body['content'],$body['author'],$user['user_id']);
+				return $article;
+			}catch(Exception $e){
+				throw new Exception($e->getMessage(),400);
+			}
+		}
+		//编辑文章
+		private function _handleArticleEidt()
+		{
+			try{
+				$user=$this->_UserLogin($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+				$article = $this->_article->fetOne($this->_id);
+				if($article['user_id'] !=$user['user_id']){
+					throw new Exception("没有编辑权限",401);
+				}
+				$body = $this->_getBodyParam();
+				$titler = empty($body)?$article['titler']:$body['titler'];
+				$content = empty($body)?$article['content']:$body['content'];
+
+
+				if($titler ==$article['titler'] && $content==$article['content']){
+					return $article;
+				}
+				return $this->_article->edit($titler, $content, $article['article_id'], $user['user_id']);
+			}catch(Exception $e){
+				throw new Exception($e->getMessage(),403);
+			}
+
+		}
+
+		//文章删除
+		private function _handleArticleDel()
+		{
+			$user=$this->_UserLogin($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+			try{
+				$article = $this->_article->fetOne($this->_id);
+				if($article['user_id'] !=$user['user_id']){
+					throw new Exception("没有编辑权限",401);
+				}
+				$this->_article->del($this->_id, $user['user_id']);
+				return null;
+
+			}catch(EXception $e){
+				throw new Exception($e->getMessage(),403);
+			}
+		}
+
+		private function _handleArticleView()
+		{
+		}
+
+
+		private function _UserLogin($username, $password)
+		{
+			try{
+				return $this->_user->login($username, $password);
+			}catch(Exception $e){
+				throw new Exception($e->getMessage(),400);
+			}
+		}
+
+		//文章列表
+		private function _handleArticleList()
+		{
+			$user=$this->_user->login($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']);
+			$page = isset($_GET['page'])?$_GET['page']:1;
+			$pagesize = isset($_GET['pagesize'])?$_GET['pagesize']:10;
+			if($pagesize>100){
+				throw new Exception("分页太大",400);
+			}
+			return $this->_article->listForPage($user['user_id'],$page,$pagesize);
 		}
 
 
