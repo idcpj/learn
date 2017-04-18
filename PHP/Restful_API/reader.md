@@ -31,7 +31,7 @@
 
 ## 3.过滤信息
 
-如果记录数量很多，服务器不肯呢个都将他们返回给用户，API应该提供参数，过滤返回结果
+如果记录数量很多，API应该提供参数，过滤返回结果
     
     ?offset=10      指定返回记录的开始位置
     ?page=2&per_page=100    
@@ -68,8 +68,37 @@
 ##编程技巧
 1.除index.php外,的其他类库,都使用抛出异常的方式,index.php中在run()接收异常,其他都通过run()调用
 
-2.调用```$_SERVER['PHP_AUTH_USER']```,``` $_SERVER['PHP_AUTH_PW']```
+2.调用`$_SERVER['PHP_AUTH_USER']```,``` $_SERVER['PHP_AUTH_PW']`
 
-3.```header("HTTP/1.1". $code ." ".$this->_statusCodes[$code]);```
+3.`header("HTTP/1.1". $code ." ".$this->_statusCodes[$code]);`
 更改状态码 
+  
+##服务器信息
+
+1.获取发送方法 `$_SERVER['REQUEST_METHOD']`
+
+2.获取`post`信息 ,接收并转换为数组`$post_data = file_get_contents('php://input');` 
+  与传统的$_POST不同在于,传统只能通过表单的`methodw='post'`方式才能使用$_POST
+  
+3.获取路径 `$_SERVER['PATH_INFO']` 
+   ```
+   http://localhost/learn/PHP/Restful_API/restful/article/12
+   通过explode('/', $path)
+   获取数据[
+        [0] =>
+        [1] => article
+        [2] => 12
+        ]
+```
+
+4.传入实例化类
+
+    public function __construct(User $user,Article $article){
+        $this->_user=$user;
+        $this->_article=$article;
+    }
     
+    $article=new Article($pdo);
+    $user=new User($pdo);
+    $restful = new Restful($user, $article);
+
