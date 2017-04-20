@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="localhost">
+  <component name="PublishConfigData" serverName="localhost" uploadOnCheckin="e553f5c6-6eec-4dc6-8225-99e4d13506fe">
     <serverData>
       <paths name="localhost">
         <serverdata>
@@ -10,5 +10,6 @@
         </serverdata>
       </paths>
     </serverData>
+    <option name="myUploadOnCheckinName" value="localhost" />
   </component>
 </project>
