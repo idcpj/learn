@@ -52,7 +52,7 @@
 
     </div>
     <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.1/jquery.js"></script>
-
+    <script type="text/javascript" src="load.js"></script>
     <script>
         var imgs=[
             'https://pic.pimg.tw/nixojov/1466125488-1841874269_n.jpg?v=1466127109',
@@ -62,22 +62,18 @@
         ];
         var index=0,
             len=imgs.length,
-            count=0,
             progress=$('.progress');
 
         //图片预加载
-        $.each(imgs,function(i,src){
-
-            var imgObj=new Image();
-            $(imgObj).on('load',function () {
+        $.preload(imgs,{
+            //每加载完一张执行的方法
+            each:function(count){
                 progress.html(Math.round((count+1)/len * 100)+'%');
-                if (count>=len-1){
-                    $('.loading').hide();
-                    document.title='1/'+len;
-                }
-                count++;
-            })
-             imgObj.src=src;
+            },
+            all:function(){
+                $('.loading').hide();
+                document.title=(index+1)+'/'+len;
+            }
         });
 
         //按钮
