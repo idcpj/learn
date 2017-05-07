@@ -61,9 +61,9 @@
 <body>
     <div class="box">
         <a href="javascript:;" id="face-btn">表情</a>
-        <!--<div class="panel">
+        <div class="panel">
             <p class="loading">表情加载中,请稍后...</p>
-            <ul class="list">
+            <!--<ul class="list">
                 <li><img src="face/QQ/1.gif" alt=""></li>
                 <li><img src="face/QQ/2.gif" alt=""></li>
                 <li><img src="face/QQ/3.gif" alt=""></li>
@@ -139,8 +139,8 @@
                 <li><img src="face/QQ/73.gif" alt=""></li>
                 <li><img src="face/QQ/74.gif" alt=""></li>
                 <li><img src="face/QQ/75.gif" alt=""></li>
-            </ul>
-        </div>-->
+            </ul>-->
+        </div>
     </div>
 
 
@@ -152,7 +152,7 @@
             $pannel=$('.panel');
         var imgs =[];
         for (var i=0;i<75;i++) {
-            imgs[i]='face/QQ'+(i+1)+'gif';
+            imgs[i]='face/QQ/'+(i+1)+'.gif';
         }
         var len=imgs.length;
 
@@ -171,6 +171,12 @@
                     html+='<li><img src="'+imgs[i]+'" alt=""></li>'
                 }
                 html+=' </ul>';
+
+                //演示用,延迟显示
+                /*setTimeout(function(){
+                    $pannel.html(html);
+                },2000);*/
+
                 $pannel.html(html);
             }
         });
