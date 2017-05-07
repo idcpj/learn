@@ -2,7 +2,7 @@
  * Created by cc on 2017/5/6.
  */
 
-/*(function($) {
+(function($) {
     function PreLoad (imgs, opts) {
         this.imgs = (typeof imgs === 'string') ? [imgs] : imgs;
         this.opts = $.extend({}, PreLoad.DEFAULTS, opts);
@@ -55,13 +55,13 @@
             new PreLoad(imgs, opts);
         }
     });
-})(jQuery);*/
+})(jQuery);
 
 
 
 
 
-
+/*
 (function($){
 
     //构造函数
@@ -105,5 +105,5 @@
     })
 
 })(jQuery);
-
+*/
 
