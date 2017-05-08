@@ -157,32 +157,40 @@
         var len=imgs.length;
 
         //点击显示
-        $btn.on('click',function () {
+        $btn.on('click',function (e) {
+            //阻止冒泡
+            e.stopPropagation();
             $pannel.show();
-        })
+            //图片预加载
+            $.preload(imgs,{
+                //加载完全部
+                all:function(){
+                    var html='';
+                    html+='<ul class="list">';
+                    for(var i=0;i<len;i++){
+                        html+='<li><img src="'+imgs[i]+'" alt=""></li>'
+                    }
+                    html+=' </ul>';
 
-        //图片预加载
-        $.preload(imgs,{
-            //加载完全部
-            all:function(){
-                var html='';
-                html+='<ul class="list">';
-                for(var i=0;i<len;i++){
-                    html+='<li><img src="'+imgs[i]+'" alt=""></li>'
-                }
-                html+=' </ul>';
+                    //演示用,延迟显示
+                    /*setTimeout(function(){
+                     $pannel.html(html);
+                     },2000);*/
 
-                //演示用,延迟显示
-                /*setTimeout(function(){
                     $pannel.html(html);
-                },2000);*/
-
-                $pannel.html(html);
-            }
-        });
-        $('#face-btn').click(function () {
-
+                }
+            });
+            $('#face-btn').click(function () {
+            })
         })
+
+
+
+        //点击空白处,表情消失
+        //注意冒泡
+        $(document).click(function(){
+            $pannel.hide();
+        });
 
     </script>
 </body>

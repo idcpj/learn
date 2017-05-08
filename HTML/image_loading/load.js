@@ -18,13 +18,16 @@
         all: null // 所有图片加载完成后执行的方法
     };
 
+    //有序加载
     PreLoad.prototype._ordered = function () { // 有序加载
         var imgs = this.imgs, len = imgs.length, count = 0, opts = this.opts;
         load();
         function load () {
             var img = new Image();
             $(img).on('load error', function() {
+
                 opts.each && opts.each(count);
+
                 if (count >= len) {
                     // 所有图片加载完毕
                     opts.all && opts.all();
@@ -36,6 +39,7 @@
             img.src = imgs[count];
         }
     };
+    //无序加载
     PreLoad.prototype._unordered = function() { // 无序加载
         var imgs = this.imgs, len = imgs.length, count = 0, opts = this.opts;
         imgs.forEach(function(elem) {
