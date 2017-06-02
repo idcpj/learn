@@ -17,9 +17,11 @@
 		$res = $link->query($sql);
 		$row=$res->fetch_assoc();
 		if(empty($navStr)){
-			$navStr =$row['catename'];
+			/*<span>$navStr<span>*/
+			$navStr ="<span>".$row['catename']."<span>";
+		}else{
+			$navStr ="<span>".$row['catename']."<span>".'/'.$navStr;
 		}
-		$navStr =$row['catename'].'/'.$navStr;
 		if($row['pid']){
 			showNav($row['pid'], $link,$navStr);
 		}
