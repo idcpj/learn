@@ -9,9 +9,6 @@
 
 	$user = new User($pdo);
 	$article = new Article($pdo);
-
-
-
 	$user = $user->login('cpj8', '1234612');
 	//print_r($user->register('cpj16', '1234612'));
 
