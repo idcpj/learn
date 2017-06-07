@@ -8,7 +8,7 @@
 			$this->tpl = PHPExcel_IOFactory::load($fn);
 			$this->target = clone $this->tpl;
 		}
-		function add_data($ar) {
+		function add_data($ar,$pre='{',$later='}') {
 			$sheet = $this->tpl->getActiveSheet();
 			//获取最大行
 			$maxRows    = $sheet->getHighestRow();
@@ -21,10 +21,10 @@
 				//列循环
 				for($iC = 0; $iC < $maxColumns; $iC++){
 					$txt = $sheet->getCellByColumnAndRow($iC, $iR)->getValue();
-					if(preg_match('/{(.+)}/',$txt ,$match)){
+					if(preg_match("/{$pre}(.+){$later}/",$txt ,$match)){
 						//获取ar的值
 						$vo=$ar[$match[1]];
-						 $this->target->getActiveSheet()->getCellByColumnAndRow($iC, $iR)->setValue($vo);
+						$this->target->getActiveSheet()->getCellByColumnAndRow($iC, $iR)->setValue($vo);
 					}
 				}
 			}
