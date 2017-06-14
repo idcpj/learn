@@ -7,9 +7,10 @@
     cd /
     mkdir www
     cd /www/
-    wget http://dl.wdlinux.cn:5180/lanmp_laster.tar.gz
-    tar zxvf lanmp_laster.tar.gz
-    sh install.sh 或者lanmp.sh
+    yum install -y wget
+    wget http://dl.wdlinux.cn/files/lanmp_v3.2.tar.gz
+    tar zxvf lanmp_v3.2.tar.gz
+    sh lanmp.sh
     选4回车
     选1回车，需要几个小时，安装中不要关机断网
 
