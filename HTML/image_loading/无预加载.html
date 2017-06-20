@@ -43,9 +43,9 @@
 
         $('.btn').on('click',function(){
            if ($(this).data('controller')=='prev'){//上一张
-                index=Math.max(0,--index);
+                index=Math.max(0,--index);//取最大值
            }else{ //下一张
-               index=Math.min(len-1,++index);
+               index=Math.min(len-1,++index);//取最小值
            }
            console.log($(this).data('controller'));
             document.title=(index+1)+'/'+len;
