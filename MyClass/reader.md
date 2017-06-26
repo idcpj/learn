@@ -3,7 +3,7 @@
 ```PHP
 download_file('../test.zip','新名字.zip')
 ```
-2.压缩
+##2.压缩
 ```php
 $res = array(
 		'../demo/api.php',
@@ -12,4 +12,4 @@ $res = array(
  create_zip($res,'data/upload/cc.zip');
 
 ```
-##class
+#class
