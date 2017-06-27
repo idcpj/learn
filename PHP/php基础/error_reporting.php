@@ -17,7 +17,7 @@
 	}
 
 	/**
-	 * 3.将错误日志报错到文件中
+	 * 3.将错误日志保存到文件中
 	 * 也可以在php.ini中设置
 	 */
 	ini_set('log_errors', 'on');//若php.ini中为开启.可在此开启
@@ -38,7 +38,7 @@
 
 	/**
 	 * 5.set_error_handler()
-	 * 设置用户的错误信息
+	 * 设置用户的错误信息,替换官方
 	 */
 	function customError($errorno, $errmsg, $file, $line){
 		echo "<b>错误代码:</b>[{$errorno}] {$errmsg}<br/>".PHP_EOL;
@@ -47,7 +47,7 @@
 	}
 	set_error_handler('customError');
 	echo $test;
-	restore_error_handler();
+	restore_error_handler();//还原
 	echo $test;
 
 	/**

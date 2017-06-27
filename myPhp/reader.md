@@ -10,6 +10,5 @@ $res = array(
 		'../demo/db.php',
 );
  create_zip($res,'data/upload/cc.zip');
-
 ```
 #class
