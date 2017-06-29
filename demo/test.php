@@ -1,9 +1,6 @@
 <?php
+	function myfun($a,$b){
+		echo $a+$b;
+	}
 
-$a="hello word";
-
-function test(){
-	static $i=1;
-	echo '$i:'.$i;
-	$i++;
-}
+	call_user_func_array('myfun', array(1,2));

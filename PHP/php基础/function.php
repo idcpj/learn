@@ -1,7 +1,7 @@
 <?php
 
-	//<editor-fold desc="引用传递.会改变参数的值">
-	function swap(&$a, &$b){
+	//<editor-fold desc="引用传递,在函数内部改变参数的值,会影响参数本身的值">
+	function swap(&$a, &$b){    //function swap(3,4)  ->必须为变量,不是值
 		$temp = $a;
 		$a = $b;
 		$b = $temp;
@@ -94,3 +94,12 @@
 	test3();
 	test4();
 	//</editor-fold>
+
+	//<editor-fold desc="call_user_func_调用自己的函数,第二个参数为函数的值,可不填">
+	function myfun($a,$b){
+		echo $a+$b;
+	}
+	call_user_func('myfun',1,2);
+	call_user_func_array('myfun', array(1,2));
+	//</editor-fold>
+
