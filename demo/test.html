@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js" type="text/javascript"></script>
 </head>
 <body>
-    <form action="/">
-        <input type="text" name="page" value="{$currentPage}">
-        <input type="submit" value="跳转">
-    </form>
+    <ul>
+
+    </ul>
+    <img src="http://img.mukewang.com/57dba501000141f501200120-200-200.jpg" alt="">
+    <input type="button" value="加载">
 </body>
+<script>
+    $.ajaxSettings({
+        dataType:"json",
+        success:function(data){
+            $("ul").empty().append("姓名:"+data.name+"年龄:"+data.age);
+        }
+    })
+
+    $("#btnShow_1").bind('click',function(){
+       $.ajax({url:"/Data/article_1.txt"});
+    });
+    $("#btnShow_2").bind('click',function(){
+       $.ajax({url:"/Data/article_2.txt"});
+    });
+</script>
 </html>
