@@ -3,7 +3,7 @@
 	//大括号和中括号等价
 
 
-	//<editor-fold desc="/输出字符串">
+	//<editor-fold desc="输出字符串">
 	$str ="abcde";
 	echo $str{0};//a
 	//</editor-fold>
@@ -35,7 +35,6 @@
 	echo gettype($str);//string
 	//</editor-fold>
 
-	//
 	//<editor-fold desc="永久转换">
 	$var = 123;
 	settype($var, 'string');

@@ -9,7 +9,7 @@
 	print_r($b);
 	//</editor-fold>
 
-	//<editor-fold desc="array_walk 的用法一,必须加引用,才能改变原来数组,array_map,只能取值,不能取取建明">
+	//<editor-fold desc="array_walk 的用法一,必须加引用,才能改变原来数组,array_map,只能取值,不能取键名">
 	$a = array(1,2,3,4,5,6,7);
 	function keypus(&$item,&$key){
 		$item = $item+$key;
