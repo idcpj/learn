@@ -47,4 +47,13 @@
 	//</editor-fold>
 
 
+	//<editor-fold desc="用printf 格式化,且直接输出  ,用sprintf返回格式后的值">
+	 printf("this is a %d",'5.23');//5
+	 printf("this is a %s","asd");
+	 printf("this is a %2.2f",'123.123');//123.12
+
+	$num =sprintf('%.2f','123.123');
+	echo $num;
+	//</editor-fold>
+
 
