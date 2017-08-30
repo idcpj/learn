@@ -5,6 +5,7 @@
     "keywords": ["php"],
     "homepage": "https://github.com/idcpj/learn",
     "license": "APACHE2.4",
+    "version": "0.1",
     "authors": [
         {
             "name": "idcpj",
