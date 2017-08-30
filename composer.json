@@ -1,0 +1,20 @@
+{
+    "name": "idcj/learn",
+    "type": "learn",
+    "description": "leaning for php",
+    "keywords": ["php"],
+    "homepage": "https://github.com/idcpj/learn",
+    "license": "APACHE2.4",
+    "authors": [
+        {
+            "name": "idcpj",
+            "email": "260083304@qq.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+    }
+}
