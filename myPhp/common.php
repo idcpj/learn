@@ -1,22 +1,27 @@
 <?php
 	/**
-	 * 无需区分系下载文件类型,下载文件
-	 * @param $file             文件路径
-	 * @param string$fileName   下载的文件名
+	 * 下载本地及网络资源文件
+	 * @param $filename
+	 * @param $outname
+	 * @internal param $orderData
+	 * @internal param $orderid
 	 */
-	function download_file($file,$fileName=''){
+	function download($filename,$outname){
 		ob_clean();
-		$fileName=empty($fileName)?basename($file):$fileName;
-		$file = file_get_contents($file);
-		//$file = fopen($file,"r");
+		//获取文件后缀
+		if(empty($outname)){
+			echo "文件名不能为空";
+		}
+		$file = file_get_contents($filename);
 		header("Content-type: application/octet-stream");
 		header("Accept-Ranges: bytes");
 		header("Accept-Length: ".strlen($file));
-		header('Content-Disposition: attachment; filename='.$fileName);
+		header('Content-Disposition: attachment; filename='.$outname);
 		header("Pragma:no-cache");
 		header("Expires:0");
 		echo $file;
 		die;
+
 	}
 
 	/**
@@ -51,6 +56,10 @@
 		}
 	}
 
+	/**
+	 * @param $url
+	 * @return mixed
+	 */
 	function sendcurl($url){
 		//初始化curl
 		$ch = curl_init();

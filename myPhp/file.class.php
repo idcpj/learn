@@ -4,7 +4,7 @@
 	 * 文件操作
 	 * Class ReadDir
 	 */
-	class file{
+	class File{
 		private $path ='';
 
 		public function __construct($dir){
