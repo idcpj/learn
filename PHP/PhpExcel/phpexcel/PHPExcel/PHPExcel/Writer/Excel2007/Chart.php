@@ -988,7 +988,7 @@ class PHPExcel_Writer_Excel2007_Chart extends PHPExcel_Writer_Excel2007_WriterPa
 					$objWriter->writeRawData( $plotSeriesValues->getDataSource() );
 				$objWriter->endElement();
 
-				$objWriter->startElement('c:'.$dataType.'Cache');
+				$objWriter->startElement('c:'.$dataType. 'Cache');
 
 					if (($groupType != PHPExcel_Chart_DataSeries::TYPE_PIECHART) &&
 						($groupType != PHPExcel_Chart_DataSeries::TYPE_PIECHART_3D) &&
