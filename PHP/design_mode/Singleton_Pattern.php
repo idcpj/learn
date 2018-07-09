@@ -1,38 +1,29 @@
 <?php
 
-	/*
-	 * //单例模式demo
-class Singleton{
-	private static $_instance = null;
 
-	//只在创建的时候被调用一次
-	private function __construct(){
-		echo  "该例子已经被实例化了";
-	}
+	//单例模式 例子一
+	class AB{
+		private static $_instance=null;
 
-	private function __clone()
-	{
-	}
+		public function __clone(){}
 
-	//需要时直接调用此方法
-	public static function getInstance(){
-		//判断是否实例化
-		if(!(self::$_instance instanceof Singleton )){
-			self::$_instance=new Singleton();
+		public function __construct(){}
+
+		public static function getInstance(){
+			if(!(self::$_instance instanceof self)){
+				self::$_instance=new self();
+			}
+			return self::$_instance;
 		}
-		return self::$_instance;
+
 	}
 
-	public function test(){
-		echo  "test hello word";
-	}
-}
-
-	$SingletnObj = Singleton::getInstance();
-	$SingletnObj->test();
-*/
+	$A = Cache::getInstance();
+	$B = Cache::getInstance();
+	$C = Cache::getInstance();
 
 
+	//例子二
 	class DB{
 		private $link ;
 		private static $_instance;
@@ -59,7 +50,7 @@ class Singleton{
 		//获取实例
 		public static function getInstance(){
 			if(!(self::$_instance instanceof self)){
-				self::$_instance = new DB();
+				self::$_instance = new self();
 			}
 			return self::$_instance;
 		}
